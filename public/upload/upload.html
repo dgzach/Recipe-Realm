@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Recipe</title>
+  <link rel="stylesheet" href="upload.css">
+</head>
+
+<body>
+  <div class="upload-container">
+    <div class="logo-container">
+      <a href="../home/home.html"><img src="../home/logo_2.png" alt="Logo" class="logo"></a>
+    </div>
+
+    <form id="uploadForm" class="upload-form">
+      <div class="form-group">
+        <label for="recipeName">Recipe Name:</label>
+        <input type="text" id="recipeName" name="recipeName" required>
+      </div>
+
+      <div class="form-section">
+        <h3>Ingredients</h3>
+        <div id="ingredientsContainer" class="input-container">
+          <!-- Initial Ingredients will be added by JS -->
+        </div>
+        <button type="button" id="addIngredientButton" class="add-button">Add Ingredient</button>
+      </div>
+
+      <div class="form-section">
+        <h3>Steps</h3>
+        <div id="stepsContainer" class="input-container">
+          <!-- Initial Steps will be added by JS -->
+        </div>
+        <button type="button" id="addStepButton" class="add-button">Add Step</button>
+      </div>
+
+      <div class="form-group">
+        <label for="recipeImage">Recipe Image:</label>
+        <input type="file" id="recipeImage" name="recipeImage" accept="image/*">
+      </div>
+
+      <button type="submit" class="submit-button">Upload Recipe</button>
+    </form>
+  </div>
+
+  <script src="upload.js"></script>
+</body>
+
+</html>

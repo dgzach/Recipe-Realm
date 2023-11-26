@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Realm</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+    <header>
+        <a href="home.html"><img src="logo_2.png" alt="Recipe Realm Logo" id="logo"></a>
+        <a href="../login_register/login_register.html"><button id="loginButton">Login/Register</button></a>
+    </header>
+    <div class="search-container">
+        <input type="text" id="searchBar" placeholder="Search recipes...">
+    </div>
+    <div class="recipe-lists">
+        <div class="trending-recipes">
+            <h2>Trending Recipes</h2>
+            <div class="recipes-horizontal-scroll">
+                <!-- Sample recipe item -->
+                <div class="recipe-item">
+                    <img src="path_to_recipe_image.jpg" alt="Recipe Name">
+                    <p>Recipe Name</p>
+                </div>
+                <!-- Repeat for other recipes -->
+            </div>
+        </div>
+        <div class="newest-recipes">
+            <h2>Newest Recipes</h2>
+            <div class="recipes-horizontal-scroll">
+                <!-- Sample recipe item -->
+                <div class="recipe-item">
+                    <img src="path_to_recipe_image.jpg" alt="Recipe Name">
+                    <p>Recipe Name</p>
+                </div>
+                <!-- Repeat for other recipes -->
+            </div>
+        </div>
+    </div>
+    <script src="home.js"></script>
+</body>
+
+</html>

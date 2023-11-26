@@ -1,0 +1,82 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#logo {
+    height: 90px;
+    /* Adjust as needed */
+}
+
+#loginButton {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.search-container {
+    text-align: center;
+    margin: 20px 0;
+}
+
+#searchBar {
+    padding: 10px;
+    width: 90%;
+    /* Almost full width */
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.recipe-lists {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    /* Spacing between lists */
+    margin-bottom: 40px;
+}
+
+.recipes-horizontal-scroll {
+    display: flex;
+    overflow-x: auto;
+    padding: 10px;
+}
+
+.recipe-item {
+    min-width: 200px;
+    /* Adjust as needed */
+    margin-right: 20px;
+    text-align: center;
+    background-color: #f4f4f4;
+    /* Light background */
+    border-radius: 10px;
+    /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.recipe-item img {
+    width: 100%;
+    /* Adjust if necessary */
+    height: auto;
+    border-top-left-radius: 10px;
+    /* Rounded corners */
+    border-top-right-radius: 10px;
+}
+
+.recipe-item p {
+    margin: 10px;
+}

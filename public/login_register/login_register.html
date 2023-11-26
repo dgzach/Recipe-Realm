@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Register</title>
+    <link rel="stylesheet" href="login_register.css">
+</head>
+
+<body>
+    <div class="container">
+        <a href="../home/home.html"><img src="../home/logo_2.png" alt="Logo" class="logo"></a>
+
+        <div id="loginForm">
+            <h2>Login</h2>
+            <input type="text" id="loginUsername" placeholder="Username">
+            <input type="password" id="loginPassword" placeholder="Password">
+            <button onclick="login()">Login</button>
+            <p>Don't have an account? <button onclick="toggleForms()">Register</button></p>
+            <p id="loginError" class="error"></p>
+        </div>
+
+        <div id="registerForm" style="display: none;">
+            <h2>Register</h2>
+            <input type="text" id="firstName" placeholder="First Name">
+            <input type="text" id="lastName" placeholder="Last Name">
+            <input type="text" id="registerUsername" placeholder="Username">
+            <input type="password" id="registerPassword" placeholder="Password">
+            <button onclick="register()">Register</button>
+            <p>Already have an account? <button onclick="toggleForms()">Login</button></p>
+            <p id="registerError" class="error"></p>
+        </div>
+    </div>
+
+    <script src="login_register.js"></script>
+</body>
+
+</html>
