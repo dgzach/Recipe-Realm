@@ -1,20 +1,21 @@
 require('dotenv').config();
 const express = require('express');
 const { MongoClient } = require('mongodb');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const path = require('path');
 const app = express();
 const port = process.env.PORT || 3000;
 
 // MongoDB setup
 const uri = process.env.MONGODB_URI;
-const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true });
-
+const client = new MongoClient(uri);
 async function connectDB() {
   try {
     await client.connect();
     console.log("Connected to MongoDB Atlas");
   } catch (e) {
-    console.error(e);
+    console.error("Failed to connect to MongoDB Atlas", e);
   }
 }
 
@@ -22,13 +23,12 @@ connectDB();
 
 // Middleware to parse JSON
 app.use(express.json());
-
 app.use(express.static(path.join(__dirname, 'public')));
 
 // API endpoint to get recipes
 app.get('/api/recipes', async (req, res) => {
   try {
-    const collection = client.db("Project 0").collection("recipes");
+    const collection = client.db("users&recipes").collection("recipes");
     const recipes = await collection.find({}).toArray();
     res.json(recipes);
   } catch (e) {
@@ -39,13 +39,13 @@ app.get('/api/recipes', async (req, res) => {
 // Endpoint for user registration
 app.post('/api/register', async (req, res) => {
     try {
-        const user = req.body; // User data from the request body
-        const collection = client.db("Project 0").collection("users");
+        const user = req.body; 
+        const collection = client.db("users&recipes").collection("users");
     
         // Check if user already exists
         const existingUser = await collection.findOne({ username: user.username });
         if (existingUser) {
-        return res.status(409).send('User already exists');
+            return res.status(409).send('User already exists');
         }
     
         // Hash the password
@@ -58,13 +58,13 @@ app.post('/api/register', async (req, res) => {
     } catch (e) {
         res.status(500).send(e.message);
     }
-    });
+});
 
 // Endpoint for user login
 app.post('/api/login', async (req, res) => {
   try {
-    const user = req.body; // User data from the request body
-    const collection = client.db("Project 0").collection("users");
+    const user = req.body; 
+    const collection = client.db("users&recipes").collection("users");
 
     // Check if user exists
     const existingUser = await collection.findOne({ username: user.username });
@@ -86,8 +86,7 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-
 // Start the server
 app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
+  console.log(`Server running at http://localhost:${port}/home/home.html`);
 });

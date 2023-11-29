@@ -1,30 +1,52 @@
-function toggleForms() {
-    const loginForm = document.getElementById('loginForm');
-    const registerForm = document.getElementById('registerForm');
-    loginForm.style.display = loginForm.style.display === 'none' ? 'block' : 'none';
-    registerForm.style.display = registerForm.style.display === 'none' ? 'block' : 'none';
-}
+document.getElementById('signupForm').addEventListener('submit', function(event) {
+    event.preventDefault();
 
-function login() {
-    // Implement login functionality
-    const username = document.getElementById('loginUsername').value;
-    const password = document.getElementById('loginPassword').value;
-    // API call to login endpoint
+    const username = document.getElementById('signupUsername').value;
+    const email = document.getElementById('signupEmail').value;
+    const password = document.getElementById('signupPassword').value;
+    const password2 = document.getElementById('signupPassword2').value;
 
-    // On success: redirect to homepage
-    // On failure: show error
-    document.getElementById('loginError').textContent = 'Incorrect username or password.';
-}
+    // Validate the input here (e.g., check if passwords match)
+    if (password !== password2) {
+        const errorMessage = document.getElementById('errorMessage');
+        errorMessage.textContent = 'Passwords do not match.';
+        return;
+    }
 
-function register() {
-    // Implement registration functionality
-    const firstName = document.getElementById('firstName').value;
-    const lastName = document.getElementById('lastName').value;
-    const username = document.getElementById('registerUsername').value;
-    const password = document.getElementById('registerPassword').value;
-    // API call to register endpoint
+    fetch('/api/register', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, email, password })
+    })
+    .then(response => {
+        if (response.status === 201) {
+            window.location.href = 'login_register.html'; // Redirect to login page
+        } else if (response.status === 409) {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.textContent = 'User already exists.';
+        } else {
+            const errorMessage = document.getElementById('errorMessage');
+            errorMessage.textContent = 'Something went wrong.';
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        const errorMessage = document.getElementById('errorMessage');
+        errorMessage.textContent = 'Error occurred during registration.';
+    });
+});
 
-    // On success: redirect to login page
-    // On failure: show error
-    document.getElementById('registerError').textContent = 'Error registering user.';
-}
+
+const registerBtn = document.getElementById('register');
+const loginBtn = document.getElementById('login');
+const container = document.getElementById('container');
+
+registerBtn.addEventListener('click', () => {
+    container.classList.add("active");
+});
+
+loginBtn.addEventListener('click', () => {
+    container.classList.remove("active");
+});
