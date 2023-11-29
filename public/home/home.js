@@ -1,5 +1,3 @@
-import { recipes } from './recipes.js';
-
 // Function to simulate rating changes and update the trending list
 function updateTrendingRecipes() {
     // Simulate rating changes
@@ -52,8 +50,46 @@ function searchRecipes() {
     displayRecipes(filteredRecipes);
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const username = localStorage.getItem('username');
+    if (username) {
+        const loginButton = document.getElementById('loginButton');
+        const logoutButton = document.createElement('button');
+        logoutButton.className = 'logout-button';
+        logoutButton.textContent = 'Logout';
+        logoutButton.id = 'logoutButton';
+        logoutButton.addEventListener('click', () => {
+            localStorage.removeItem('accessToken');
+            localStorage.removeItem('username');
+            window.location.href = '../login_register/login_register.html';
+        });
+
+        // Replace login button with username and logout button
+        loginButton.style.display = 'none';
+        const usernameDisplay = document.createElement('span');
+        usernameDisplay.className = 'username-display';
+        usernameDisplay.textContent = `Welcome, ${username}`;
+        loginButton.parentNode.insertBefore(usernameDisplay, loginButton);
+        loginButton.parentNode.insertBefore(logoutButton, loginButton);
+    }
+});
+
+
 
 window.onload = () => {
+    const username = localStorage.getItem('username');
+    if (username) {
+        document.getElementById('loginButton').style.display = 'none';
+        document.getElementById('usernameDisplay').textContent = `Welcome, ${username}`;
+        document.getElementById('logoutButton').style.display = 'inline';
+    }
     updateTrendingRecipes();
     displayRecipes(recipes);
 };
+
+// Logout functionality
+document.getElementById('logoutButton').addEventListener('click', function() {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('username');
+    window.location.href = 'home.html'; // Redirect to home page
+});

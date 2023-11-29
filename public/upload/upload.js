@@ -51,36 +51,4 @@ function createInputField(container, fieldName) {
     container.appendChild(removeButton);
 }
 
-function submitRecipe(event) {
-    event.preventDefault();
-    
-    // Get the form data
-    const form = event.target;
-    const formData = new FormData(form);
-    
-    // Perform form validation
-    if (!validateForm(formData)) {
-        return;
-    }
-    
-    // Convert form data to JSON
-    const recipeData = convertFormDataToJson(formData);
-    
-    // Send the recipe data to the server
-    sendRecipeData(recipeData);
-}
 
-function validateForm(formData) {
-    // Implement form validation logic
-    // Return true if the form is valid, false otherwise
-
-}
-
-function convertFormDataToJson(formData) {
-    // Implement logic to convert form data to JSON
-    // Return the JSON object
-}
-
-function sendRecipeData(recipeData) {
-    // Implement logic to send the recipe data to the server
-}

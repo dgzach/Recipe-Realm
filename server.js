@@ -36,6 +36,18 @@ app.get('/api/recipes', async (req, res) => {
   }
 });
 
+// API endpoint to upload recipe
+app.post('/api/recipes', async (req, res) => {
+  try {
+    const recipe = req.body;
+    const collection = client.db("users&recipes").collection("recipes");
+    await collection.insertOne(recipe);
+    res.status(201).send();
+  } catch (e) {
+    res.status(500).send(e);
+  }
+});
+
 // Endpoint for user registration
 app.post('/api/register', async (req, res) => {
     try {
@@ -43,9 +55,9 @@ app.post('/api/register', async (req, res) => {
         const collection = client.db("users&recipes").collection("users");
     
         // Check if user already exists
-        const existingUser = await collection.findOne({ username: user.username });
+        const existingUser = await collection.findOne({ email: user.email });
         if (existingUser) {
-            return res.status(409).send('User already exists');
+            return res.status(409).send('Email already in use');
         }
     
         // Hash the password
@@ -54,6 +66,7 @@ app.post('/api/register', async (req, res) => {
     
         // Insert the user into the database
         await collection.insertOne(user);
+        console.log("User created successfully", user);
         res.status(201).send();
     } catch (e) {
         res.status(500).send(e.message);
@@ -62,29 +75,35 @@ app.post('/api/register', async (req, res) => {
 
 // Endpoint for user login
 app.post('/api/login', async (req, res) => {
-  try {
-    const user = req.body; 
-    const collection = client.db("users&recipes").collection("users");
+    try {
+        const { email, password } = req.body; 
 
-    // Check if user exists
-    const existingUser = await collection.findOne({ username: user.username });
-    if (!existingUser) {
-      return res.status(401).send('Incorrect username or password');
+        const collection = client.db("users&recipes").collection("users");
+
+        // Check if user exists
+        const existingUser = await collection.findOne({ email: email });
+
+        if (!existingUser) {
+            return res.status(401).send('Incorrect email or password');
+        }
+
+        // Check if password is correct
+        const passwordMatch = await bcrypt.compare(password, existingUser.password);
+
+        if (!passwordMatch) {
+            return res.status(401).send('Incorrect email or password');
+        }
+
+        // Generate an access token
+        const accessToken = jwt.sign({ username: existingUser.username }, process.env.ACCESS_TOKEN_SECRET);
+
+        res.json({ accessToken });
+    } catch (e) {
+        console.error("Login error:", e); // Detailed error logging
+        res.status(500).send('Internal Server Error');
     }
-
-    // Check if password is correct
-    const passwordMatch = await bcrypt.compare(user.password, existingUser.password);
-    if (!passwordMatch) {
-      return res.status(401).send('Incorrect username or password');
-    }
-
-    // Generate an access token
-    const accessToken = jwt.sign({ username: existingUser.username }, process.env.ACCESS_TOKEN_SECRET);
-    res.json({ accessToken });
-  } catch (e) {
-    res.status(500).send(e.message);
-  }
 });
+
 
 // Start the server
 app.listen(port, () => {

@@ -1,3 +1,4 @@
+// Handle user signup
 document.getElementById('signupForm').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -22,19 +23,51 @@ document.getElementById('signupForm').addEventListener('submit', function(event)
     })
     .then(response => {
         if (response.status === 201) {
-            window.location.href = 'login_register.html'; // Redirect to login page
-        } else if (response.status === 409) {
-            const errorMessage = document.getElementById('errorMessage');
-            errorMessage.textContent = 'User already exists.';
+            location.reload();
         } else {
+            return response.text(); // Get the actual error message
+        }
+    })
+    .then(text => {
+        if (text) {
             const errorMessage = document.getElementById('errorMessage');
-            errorMessage.textContent = 'Something went wrong.';
+            errorMessage.textContent = text; // Display the error message from the server
         }
     })
     .catch(error => {
         console.error('Error:', error);
         const errorMessage = document.getElementById('errorMessage');
         errorMessage.textContent = 'Error occurred during registration.';
+    });
+});
+
+// Handle user login
+document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    const email = document.querySelector('#loginForm input[type="email"]').value;
+    const password = document.querySelector('#loginForm input[type="password"]').value;
+
+    fetch('/api/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.accessToken) {
+            // Store access token and username in local storage
+            localStorage.setItem('accessToken', data.accessToken);
+            localStorage.setItem('username', data.username); // Assuming username is included in response
+            window.location.href = '../home/home.html'; // Redirect to home page
+        } else {
+            alert('Login failed');
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
     });
 });
 

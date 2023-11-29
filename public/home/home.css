@@ -100,3 +100,17 @@ header {
 #navbar ul li a:hover {
     color: #007bff;
 }
+
+.username-display {
+    color: #333;
+    margin-right: 10px;
+}
+
+.logout-button {
+    background-color: #f44;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
