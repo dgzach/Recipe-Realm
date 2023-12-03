@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#logo {
+    height: 90px;
+}
+
+#navbar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+#navbar ul li {
+    margin: 0 10px;
+}
+
+#navbar ul li a {
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+#navbar ul li a:hover {
+    color: #007bff;
+}
+
+#user-recipes {
+    padding: 10px;
+}
+
+.recipe-container {
+    display: flex;
+  }
+
+.recipe-card-container {
+    height: 300px;
+    width: calc(50% - 350px);
+    border-radius: 8px;
+    padding: 10px;
+    margin-top: 50px;
+    margin-bottom: 40px;
+    box-shadow: 0px 0px 5px 1px grey;
+    overflow: hidden;
+}
+
+#recipeimage {
+    width: auto;
+    height: 200px;
+    /*border: 1px solid #007bff; /* Add a border between the image and title */
+    margin: auto;
+    object-fit: fill;
+}
+
+#recipe-title {
+    font-size: 18px;
+    margin: 10px 0 0; /* Adjust the margin for spacing */
+    color: #333;
+}
+
+#bio-container {
+    margin: auto;
+    text-align: center;
+    color: #333;
+    position: relative;
+    padding: 10px;
+    width: 500px;
+}
+
+#user-profile {
+    display: flex;
+    align-items: flex-start;
+    margin: 20px;
+    margin-bottom: 80px;
+}
+
+#profile-pic {
+    width: 120px;
+    height: auto;
+    border-radius: 50%; /* Make it a circle */
+    box-shadow: 0px 0px 5px 1px grey;
+    position: absolute;
+    top: 100;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+}
+
+#username {
+    align-items: center;
+    margin: auto;
+    margin-top: 50px;
+}
+
+#user-info {
+    margin: auto;
+    margin-top: 60px;
+    align-self: center;
+    box-shadow: 1px 1px 8px 0 grey;
+    border-radius: 18px;
+    border-top: 2px solid #ccc; /* Top border for the box */
+    padding-top: 20px; /* Add padding to create space between the border and content */
+    width: 1000px;
+}
