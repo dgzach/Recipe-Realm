@@ -4,31 +4,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recipe Realm</title>
-    <!-- Add CSS link here for styling -->
+    <title>Uploaded Recipe</title>
+    <link rel="stylesheet" href="viewuploaded.css">
 </head>
 
 <body>
 
     <header>
-        <h1>Your Recipe Sharing App</h1>
-        <!-- Add navigation or other header content -->
+        <a href="../home/home.html"><img src="rrlogo.png" alt="Recipe Realm Logo" id="logo"></a>
+        <nav id="navbar">
+            <ul>
+                <li><a href="../home/home.html">Home</a></li>
+                <li><a href="../myaccount/myaccount.html">Account</a></li>
+                <li><a href="../Shop_page/Shop.html">Store</a></li>
+                <li><a href="../upload/upload.html">Upload</a></li>
+            </ul>
+        </nav>
     </header>
 
     <main>
         <section id="recipe-list">
-            <h2>Your Uploaded Recipes</h2>
+            <h2>Your Recipe Title</h2>
+
+            <div class="quick-info">
+                <p class="rating">Rating: 4.5/5</p>
+                <p>Brief Description: Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+                <p>Author: username</p>
+                <p>Last Updated: Month 00, 0000</p>
+            </div>
+
+            <img src="/reciperealm/public/myaccount/myaccountimg/recipeimg1.jpg" alt="Recipe Image">
 
             <!-- Example recipe card -->
             <article class="recipe-card">
-                <h3>Recipe Title</h3>
-                <p>Description of the recipe goes here.</p>
+                <h3>Ingredients</h3>
                 <ul>
                     <li>Ingredient 1</li>
                     <li>Ingredient 2</li>
                     <!-- Add more ingredients as needed -->
                 </ul>
-                <p>Instructions:</p>
+                <p>Cooking Instructions:</p>
                 <ol>
                     <li>Step 1: Instruction 1</li>
                     <li>Step 2: Instruction 2</li>
@@ -36,13 +51,10 @@
                 </ol>
             </article>
 
-            <!-- Add more recipe cards dynamically based on user uploads -->
-
         </section>
     </main>
 
     <footer>
-        <!-- Add footer content -->
         <p>&copy; 2023 Recipe Realm</p>
     </footer>
 
