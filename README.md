@@ -1,5 +1,5 @@
-# reciperealm
-418 project
+# Recipe Realm
+ICSI-418 project
 
 Step 1: Install Node.js
 Ensure Node.js is installed on the computer. If not, download and install it from https://nodejs.org/en
